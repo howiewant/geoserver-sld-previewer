@@ -1,6 +1,8 @@
 <script setup>
 import { ref, computed } from 'vue';
 import PointStyleForm from './components/PointStyleForm.vue';
+import LineStyleForm from './components/LineStyleForm.vue';
+import PolygonStyleForm from './components/PolygonStyleForm.vue';
 
 // 共享数据
 const wmsUrl = ref('');
@@ -212,36 +214,16 @@ const generatePolygonSLD = () => {
               />
               
               <!-- 线样式表单 -->
-              <template v-else-if="geometryType === 'line'">
-                <el-form-item label="颜色">
-                  <el-color-picker v-model="lineStyles.color"></el-color-picker>
-                </el-form-item>
-                <el-form-item label="宽度">
-                  <el-input-number v-model="lineStyles.width" :min="1" :max="10"></el-input-number>
-                </el-form-item>
-                <el-form-item label="透明度">
-                  <el-slider v-model="lineStyles.opacity" :min="0" :max="1" :step="0.1" show-input></el-slider>
-                </el-form-item>
-                <el-form-item label="虚线样式">
-                  <el-input v-model="lineStyles.dashArray" placeholder="例如: 5,5"></el-input>
-                </el-form-item>
-              </template>
+              <LineStyleForm 
+                v-else-if="geometryType === 'line'" 
+                v-model:lineStyles="lineStyles"
+              />
               
               <!-- 面样式表单 -->
-              <template v-else-if="geometryType === 'polygon'">
-                <el-form-item label="填充颜色">
-                  <el-color-picker v-model="polygonStyles.fillColor"></el-color-picker>
-                </el-form-item>
-                <el-form-item label="填充透明度">
-                  <el-slider v-model="polygonStyles.fillOpacity" :min="0" :max="1" :step="0.1" show-input></el-slider>
-                </el-form-item>
-                <el-form-item label="边框颜色">
-                  <el-color-picker v-model="polygonStyles.strokeColor"></el-color-picker>
-                </el-form-item>
-                <el-form-item label="边框宽度">
-                  <el-input-number v-model="polygonStyles.strokeWidth" :min="0" :max="10"></el-input-number>
-                </el-form-item>
-              </template>
+              <PolygonStyleForm 
+                v-else-if="geometryType === 'polygon'" 
+                v-model:polygonStyles="polygonStyles"
+              />
 
 
               <el-form-item label="SLD配置">
