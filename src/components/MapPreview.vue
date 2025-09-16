@@ -50,7 +50,7 @@ import { ref, onMounted, watch, nextTick, computed } from 'vue'
 import { Map, View } from 'ol'
 import TileLayer from 'ol/layer/Tile'
 import ImageLayer from 'ol/layer/Image'
-import OSM from 'ol/source/OSM'
+import XYZ from 'ol/source/XYZ'
 import ImageWMS from 'ol/source/ImageWMS'
 import { fromLonLat } from 'ol/proj'
 import { CopyDocument } from '@element-plus/icons-vue'
@@ -83,15 +83,27 @@ const initMap = () => {
   if (!mapContainer.value) return
 
   try {
-    // 创建底图图层
+    const tk = '9efe144857648780afd069b42769ebe7'
+    // 创建底图图层 - 使用天地图（中国可用）
     const baseLayer = new TileLayer({
-      source: new OSM()
+      source: new XYZ({
+        url: `https://t{0-6}.tianditu.gov.cn/img_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=img&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk=${tk}`,
+        projection: 'EPSG:3857'
+      })
+    })
+
+    // 天地图注记
+     const annLayer = new TileLayer({
+      source: new XYZ({
+        url: `https://t{0-6}.tianditu.gov.cn/cia_w/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=cia&STYLE=default&TILEMATRIXSET=w&FORMAT=tiles&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}&tk=${tk}`,
+        projection: 'EPSG:3857'
+      })
     })
 
     // 创建地图
     map.value = new Map({
       target: mapContainer.value,
-      layers: [baseLayer],
+      layers: [baseLayer, annLayer],
       view: new View({
         center: fromLonLat([104, 35]), // 中国中心
         zoom: 4
