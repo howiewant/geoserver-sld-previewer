@@ -21,6 +21,14 @@
               <el-icon><Download /></el-icon>
               导出SLD
             </el-button>
+            <el-button 
+              type="info" 
+              @click="openGithub"
+              circle
+              class="github-btn"
+            >
+              <img src="/github-mark-white.svg" alt="GitHub" class="github-icon">
+            </el-button>
           </div>
         </div>
       </el-header>
@@ -65,6 +73,7 @@
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { MapLocation, Setting, Delete, Download, Share } from '@element-plus/icons-vue'
 import SldConfigPanel from './components/SldConfigPanel.vue'
 import MapPreview from './components/MapPreview.vue'
 import GeoserverConfigDialog from './components/GeoserverConfigDialog.vue'
@@ -136,6 +145,11 @@ const exportSLD = () => {
   document.body.removeChild(a)
   URL.revokeObjectURL(url)
   ElMessage.success('SLD文件已导出')
+}
+
+// 打开GitHub仓库
+const openGithub = () => {
+  window.open('https://github.com/howiewant/geoserver-sld-previewer', '_blank')
 }
 </script>
 
@@ -275,5 +289,11 @@ const exportSLD = () => {
   .main-container {
     flex-direction: column;
   }
+}
+
+.github-icon {
+  width: 20px;
+  height: 20px;
+  filter: invert(1);
 }
 </style>

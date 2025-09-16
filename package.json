@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@element-plus/icons-vue": "^2.3.0",
+    "@element-plus/icons-vue": "^2.3.2",
     "axios": "^1.6.0",
     "element-plus": "^2.4.0",
     "js2xmlparser": "^5.0.0",
