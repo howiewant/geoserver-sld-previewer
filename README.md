@@ -2,6 +2,8 @@
 
 一个基于 Vue 3 + Element Plus + OpenLayers 的 GeoServer SLD 样式预览工具，支持实时预览和配置管理。
 
+[在线使用](https://www.xazrhh.com:1443/geoserver-sld-previewer/)
+
 ## ✨ 特性
 
 - **实时 SLD 预览**: 在 GeoServer WMS 图层上实时预览 SLD 样式效果
