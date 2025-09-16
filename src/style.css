@@ -1,0 +1,281 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #app {
+  height: 100%;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.sld-editor {
+  height: 100vh;
+  display: flex;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.config-panel {
+  width: 420px;
+  border-right: 2px solid #e8f4fd;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafe 100%);
+  overflow-y: auto;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.map-panel {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.map-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  margin: 8px;
+  width: calc(100% - 16px);
+  height: calc(100% - 16px);
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.toolbar .el-button {
+  margin: 0 4px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.toolbar .el-button--primary {
+  background: linear-gradient(135deg, #409eff 0%, #67c23a 100%);
+  border: none;
+  box-shadow: 0 2px 8px rgba(64, 158, 255, 0.3);
+}
+
+.toolbar .el-button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(64, 158, 255, 0.4);
+}
+
+.toolbar .el-button:not(.el-button--primary) {
+  background: white;
+  border: 1px solid #e8f4fd;
+  color: #606266;
+}
+
+.toolbar .el-button:not(.el-button--primary):hover {
+  border-color: #409eff;
+  color: #409eff;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(64, 158, 255, 0.2);
+}
+
+.sld-preview {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  max-height: 240px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+}
+
+.sld-preview .el-collapse {
+  border: none;
+  background: transparent;
+}
+
+.sld-preview .el-collapse-item__header {
+  background: linear-gradient(135deg, #f8fbff 0%, #f0f9ff 100%);
+  border-bottom: 1px solid #e8f4fd;
+  font-weight: 500;
+  padding: 12px 16px;
+}
+
+.sld-preview .el-textarea__inner {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.form-section {
+  margin-bottom: 20px;
+}
+
+.form-section .el-divider {
+  margin: 16px 0;
+}
+
+.color-picker-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.opacity-slider {
+  margin-top: 8px;
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #409eff 0%, #67c23a 100%);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #337ecc 0%, #529b2e 100%);
+}
+
+/* Element Plus 组件样式覆盖 */
+.el-input__wrapper {
+  transition: all 0.3s ease;
+}
+
+.el-input__wrapper:hover {
+  box-shadow: 0 0 0 1px rgba(64, 158, 255, 0.2);
+}
+
+.el-input__wrapper.is-focus {
+  box-shadow: 0 0 0 1px #409eff;
+}
+
+.el-select__wrapper:hover {
+  box-shadow: 0 0 0 1px rgba(64, 158, 255, 0.2);
+}
+
+.el-color-picker__trigger:hover {
+  border-color: #409eff;
+}
+
+/* 修复表单组件宽度溢出问题 */
+.config-panel .el-slider {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+.config-panel .el-slider--with-input {
+  padding-right: 0;
+}
+
+.config-panel .el-slider__input {
+  width: 80px !important;
+  min-width: 80px !important;
+  flex-shrink: 0;
+}
+
+.config-panel .el-input-number {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+.config-panel .el-select {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+.config-panel .el-form-item__content {
+  max-width: 100%;
+  overflow: visible;
+}
+
+.config-panel .color-picker-wrapper {
+  max-width: 100%;
+  overflow: visible;
+}
+
+.config-panel .symbolizer-item {
+  overflow: visible;
+}
+
+.config-panel .symbolizer-config {
+  overflow: visible;
+}
+
+/* 确保所有表单元素不超出容器 */
+.config-panel * {
+  box-sizing: border-box;
+}
+
+.config-panel .el-form {
+  overflow: visible;
+}
+
+/* 特殊处理可能溢出的组件 */
+.config-panel .el-slider__runway {
+  overflow: visible;
+}
+
+.config-panel .el-input-number__decrease,
+.config-panel .el-input-number__increase {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+  .config-panel {
+    width: 360px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sld-editor {
+    flex-direction: column;
+  }
+  
+  .config-panel {
+    width: 100%;
+    height: 40vh;
+    border-right: none;
+    border-bottom: 2px solid #e8f4fd;
+  }
+  
+  .map-panel {
+    height: 60vh;
+  }
+  
+  .toolbar {
+    top: 8px;
+    right: 8px;
+    padding: 8px;
+  }
+  
+  .sld-preview {
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    max-height: 120px;
+  }
+}
